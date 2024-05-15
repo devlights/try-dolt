@@ -1,0 +1,49 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task: delete
+      - task: initdb
+      - task: initdata
+      - task: commit
+      - task: start-server
+      - task: run-app
+      - task: kill-server
+  delete:
+    cmds:
+      - rm -rf ./.dolt
+      - rm -rf ./.tmp
+      - rm -rf ./db0
+      - rm -f ./app{{exeExt}}
+  initdb:
+    cmds:
+      - dolt init
+  initdata:
+    cmds:
+      - dolt sql --query "CREATE DATABASE db0;"
+      - dolt --use-db=db0 sql --query "CREATE TABLE tableA (id int primary key, name varchar(50));"
+      - dolt --use-db=db0 sql --query "INSERT INTO tableA (id, name) VALUES (1, 'gitpod1');"
+  commit:
+    cmds:
+      - dolt --use-db=db0 status
+      - dolt --use-db=db0 add tableA
+      - dolt --use-db=db0 diff --cached
+      - dolt --use-db=db0 commit -m "Add tableA"
+      - dolt --use-db=db0 log --oneline
+  start-server:
+    cmds:
+      - dolt sql-server &
+      - sleep 2
+  run-app:
+    cmds:
+      - go build -o app{{exeExt}}
+      - for i in {1..3}; do ./app{{exeExt}}; done
+  kill-server:
+    cmds:
+      - pkill dolt
+  help:
+    cmds:
+      - dolt --help

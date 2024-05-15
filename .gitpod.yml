@@ -5,7 +5,9 @@ tasks:
   - name: install
     command: 
       sudo bash -c 'curl -L https://github.com/dolthub/dolt/releases/latest/download/install.sh | sudo bash' && 
-      go install github.com/go-task/task/v3/cmd/task@latest
+      go install github.com/go-task/task/v3/cmd/task@latest &&
+      dolt config --global --add user.email "gitpod@example.com" && 
+      dolt config --global --add user.name "gitpod"
 
 vscode:
   extensions:
