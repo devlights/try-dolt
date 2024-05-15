@@ -38,6 +38,3 @@ This is my TUTORIAL project for dolt.
 > DoltgreSQLの使用は非常に簡単で、最新リリースをダウンロードし、バイナリをPATHに追加し、データベースを作成して接続するだけです。ただし、現在は非常に初期段階であり、多くのエラーや問題が予想されます。頻繁にリリースが行われる予定で、最新の進捗を確認するにはソースからビルドするのが最適です。
 
 > 今後の開発に向けて、ユーザーからのフィードバックや貢献を歓迎しています。TwitterやDiscordで意見を共有することができます。
-
-Citations:
-[1] https://www.dolthub.com/blog/2023-11-01-announcing-doltgresql/#:~:text=We%20are%20pleased%20to%20announce%20tha
