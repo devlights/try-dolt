@@ -2,10 +2,10 @@
 image: gitpod/workspace-full:latest
 
 tasks:
-  - name: install dolt
-    command: sudo bash -c 'curl -L https://github.com/dolthub/dolt/releases/latest/download/install.sh | sudo bash'
-  - name: install task
-    command: go install github.com/go-task/task/v3/cmd/task@latest
+  - name: install
+    command: 
+      sudo bash -c 'curl -L https://github.com/dolthub/dolt/releases/latest/download/install.sh | sudo bash' && 
+      go install github.com/go-task/task/v3/cmd/task@latest
 
 vscode:
   extensions:
