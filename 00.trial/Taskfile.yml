@@ -12,6 +12,7 @@ tasks:
       - task: start-server
       - task: run-app
       - task: kill-server
+      - task: commit-changed
   delete:
     cmds:
       - rm -rf ./.dolt
@@ -36,11 +37,18 @@ tasks:
   start-server:
     cmds:
       - dolt sql-server &
-      - sleep 2
+      - sleep 1
   run-app:
     cmds:
       - go build -o app{{exeExt}}
       - for i in {1..3}; do ./app{{exeExt}}; done
+  commit-changed:
+    cmds:
+      - dolt --use-db=db0 status
+      - dolt --use-db=db0 diff
+      - dolt --use-db=db0 commit -am "Update"
+      - dolt --use-db=db0 log --oneline
+      - dolt --use-db=db0 diff HEAD~2 HEAD
   kill-server:
     cmds:
       - pkill dolt
